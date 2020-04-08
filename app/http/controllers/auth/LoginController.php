@@ -34,10 +34,12 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        if (! $request->has('code') || ! $request->has('state') || $request->input('state') !== session()->pull('vatsimauthstate')) {
+        if (! $request->has('code') || ! $request->has('state')) {
             $authorizationUrl = $this->provider->getAuthorizationUrl(); // Generates state
             $request->session()->put('vatsimauthstate', $this->provider->getState());
 			return redirect()->away($authorizationUrl);
+        } else if ($request->input('state') !== session()->pull('vatsimauthstate')) {
+            return redirect()->route('home')->withError("Something went wrong, please try again (state mismatch).");
         } else {
             return $this->verifyLogin($request);
         }
