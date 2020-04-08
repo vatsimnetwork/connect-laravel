@@ -15,6 +15,9 @@ Add the following to your `composer.json` file
     },
 ```
 
-    
+Run the following commands
+`composer update`
+
+`php artisan migrate`
 
 
