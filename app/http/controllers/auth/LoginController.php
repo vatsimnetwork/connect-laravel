@@ -75,8 +75,8 @@ class LoginController extends Controller
     protected function completeLogin($resourceOwner, $token)
     {
         $account = User::firstOrNew(['id' => $resourceOwner->data->cid]);
-        $account->fname = utf8_decode($resourceOwner->data->personal->name_first);
-        $account->lname = utf8_decode($resourceOwner->data->personal->name_last);
+        $account->fname = $resourceOwner->data->personal->name_first;
+        $account->lname = $resourceOwner->data->personal->name_last;
         $account->email = $resourceOwner->data->personal->email;
         if ($resourceOwner->data->oauth->token_valid) { // User has given us permanent access to updated data
             $account->access_token = $token->getToken();
