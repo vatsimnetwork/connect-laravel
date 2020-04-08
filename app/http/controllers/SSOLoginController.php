@@ -82,8 +82,8 @@ class SSOLoginController extends Controller
     {
         $account = User::firstOrNew(['id' => $user->id]);
 
-        $account->fname = utf8_decode($user->name_first);
-        $account->lname = utf8_decode($user->name_last);
+        $account->fname = $user->name_first;
+        $account->lname = $user->name_last;
         $account->email = $user->email;
         $account->save();
 
