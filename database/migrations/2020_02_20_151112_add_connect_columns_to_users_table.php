@@ -13,18 +13,11 @@ class AddConnectColumnsToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            // Remove non-needed columns
-            $table->dropColumn('email_verified_at');
-            $table->dropColumn('name');
-            $table->dropColumn('password');
-            
-            // Add needed columns
-            $table->string('fname', 191);
-            $table->string('lname', 191);
-            $table->text('access_token')->after('permissions')->nullable();
-            $table->text('refresh_token')->after('access_token')->nullable();
-            $table->unsignedBigInteger('token_expires')->after('refresh_token')->nullable();
+        Schema::table('users', function (Blueprint $table) {            
+            // Add these to your users table
+            $table->text('access_token')->nullable();
+            $table->text('refresh_token')->nullable();
+            $table->unsignedBigInteger('token_expires')->nullable();
         });
     }
 
@@ -39,10 +32,6 @@ class AddConnectColumnsToUsersTable extends Migration
             $table->dropColumn('token_expires');
             $table->dropColumn('refresh_token');
             $table->dropColumn('access_token');
-            
-            $table->string('name');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
         });
     }
 }
