@@ -2,59 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use League\OAuth2\Client\Token\AccessToken;
 use App\Http\Controllers\VatsimOAuthController;
 
-/**
- * Class User.
- *
- * @property int $id
- * @property string $fname
- * @property string $lname
- * @property string $email
- * @property int $permissions
- * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereFname($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereLname($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePermissions($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
- * @mixin \Eloquent
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
- */
 class User extends Authenticatable
 {
-    use Notifiable;
-
     /**
-     * The attributes that are mass assignable.
+     * Your user model will need to contain at least the following attributes.
      *
      * @var array
      */
     protected $fillable = [
-        'id', 'fname', 'lname', 'email', 'permissions', 'access_token', 'refresh_token', 'token_expires'
+        'access_token',
+        'refresh_token',
+        'token_expires',
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * At least the following attributes should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'remember_token',
+        'access_token',
+        'refresh_token',
+        'token_expires',
     ];
 
     /**
-     * Return a valid access token for the user or return null if none
+     * When doing $user->token, return a valid access token or null if none exists
      * 
      * @return \League\OAuth2\Client\Token\AccessToken 
      * @return null

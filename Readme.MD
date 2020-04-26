@@ -10,13 +10,12 @@ Add the following to your `composer.json` file
 
 ```json
  "require": {
-        "league/oauth2-client": "^2.4",
-        "vatsim/sso": "3.*"
+        "league/oauth2-client": "^2.4"
     },
 ```
 
 Run the following commands
-`composer update`
+`composer install`
 
 `php artisan migrate`
 
